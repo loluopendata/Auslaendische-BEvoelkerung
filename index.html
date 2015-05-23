@@ -87,6 +87,23 @@ $ git checkout gh-pages
 <a id="daten" class="anchor" href="#daten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Daten</h3>
 
 <p>Woher kamen die Daten? (Quellen) wie wurden sie aufbereitet, welche Informationen waren vorhanden?</p>
+
+<pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Schweiz", "Albanien", "Andorra", ...], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
+</code></pre>
+
+<pre><code> for (var key in world) {
+  if (world.hasOwnProperty(key)) {
+    var count=0;
+    for(var i=0;i&lt;world[key].length;i++){
+      if(world[key][i]!="Schweiz"){
+          count = count+row[world[key][i]];
+      }
+
+    }
+      row[key]=count;    
+  }        
+}
+</code></pre>
       </section>
     </div>
 
