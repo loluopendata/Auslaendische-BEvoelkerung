@@ -88,8 +88,14 @@ $ git checkout gh-pages
 
 <p>Woher kamen die Daten? (Quellen) wie wurden sie aufbereitet, welche Informationen waren vorhanden?</p>
 
+<p>Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden die Daten beim Laden des Datensatzes berechnet. </p>
+
+<p>Dazu wurde ein neues Objekt (world) definiert, welches die einzelnen Kategorien repräsentiert und welche Nationalitäten darin enthalten sind:</p>
+
 <pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Schweiz", "Albanien", "Andorra", ...], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
 </code></pre>
+
+<p>Beim Laden des Datensatzes wird über das Objekt iteriert und die Bevölkerungszahl wird pro Kategorie zusammengezählt. Die Schweiz..  (könnte man auch weglassen)</p>
 
 <pre><code> for (var key in world) {
   if (world.hasOwnProperty(key)) {
