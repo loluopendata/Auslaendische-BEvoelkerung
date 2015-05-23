@@ -76,12 +76,35 @@ $ git checkout gh-pages
 <h3>
 <a id="sunburst" class="anchor" href="#sunburst" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sunburst</h3>
 
-<p>Quelle für Sunburst, welche Anpassungen waren notwendig?</p>
+<p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>
+Quelle für Sunburst, welche Anpassungen waren notwendig? </p>
 
 <h3>
 <a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
 
-<p>Quelle für den Code für die Legende</p>
+<p>Baisert auf <a href="http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/">http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/</a></p>
+
+<p>Die Legende wird bei jeder Änderung des Filters neu generiert:</p>
+
+<pre><code>function drawLegend(scale){
+    d3.select('#legend').selectAll('ul').remove();
+    var legend = d3.select('#legend')
+    .append('ul')
+    .attr('class', 'list-inline');
+
+    var keys = legend.selectAll('li.key')
+    .data(scale.range());
+
+    keys.enter().append('li')
+    .attr('class', 'key')
+    .style('border-top-color', String)
+    .text(function(d) {
+        var r = scale.invertExtent(d);
+        return Math.round(r[0]*1000)/10+'%';
+    });
+
+}
+</code></pre>
 
 <h3>
 <a id="daten" class="anchor" href="#daten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Daten</h3>
@@ -95,7 +118,7 @@ $ git checkout gh-pages
 <pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Schweiz", "Albanien", "Andorra", (...)], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
 </code></pre>
 
-<p>Beim Laden des Datensatzes wird über das Objekt iteriert und die Bevölkerungszahl wird pro Kategorie zusammengezählt. Die Schweiz..  (könnte man auch weglassen)</p>
+<p>Beim Laden des Datensatzes wird über die Eigenschaften des Objekts (world) iteriert und die Bevölkerung wird pro Kategorie zusammengezählt. Die Schweiz..  (könnte man auch weglassen)</p>
 
 <pre><code> for (var key in world) {
   if (world.hasOwnProperty(key)) {
