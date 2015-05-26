@@ -118,14 +118,25 @@ Quelle für Sunburst, welche Anpassungen waren notwendig? </p>
 <li><a href="https://github.com/loluopendata/Auslaendische-Bevoelkerung-BE/data/Gemeinden_2010.csv">Gemeinden_2010.csv</a></li>
 </ul>
 
-<p>Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden die Daten beim Laden des Datensatzes berechnet. </p>
+<p>Die verwendeten Geodaten des Kantons Bern können unter folgendem Link im TopoJSON Format heruntergeladen werden:</p>
 
-<p>Dazu wurde ein neues Objekt (world) definiert, welches die einzelnen Kategorien repräsentiert und welche Nationalitäten darin enthalten sind:</p>
+<ul>
+<li><a href="https://github.com/loluopendata/Auslaendische-Bevoelkerung-BE/data/be-municipalities.json">be-municipalities.json</a></li>
+</ul>
 
-<pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Schweiz", "Albanien", "Andorra", (...)], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
+<h3>
+<a id="gemeindefusionen" class="anchor" href="#gemeindefusionen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gemeindefusionen</h3>
+
+<p>Weil die Datensätze Bevölkerungsdaten (2010-2013) und Geodaten (2015) zu verschiedenen Zeitpunkten erhoben wurden, stellte sich uns das Problem, dass einige Gemeinden inzwischen fusioniert wurden und damit nicht mehr existierten, bzw. neue Fusionsgemeinden in der Zwischenzeit entstanden sind. Wir entschieden uns dazu, die aktuellen GeoDaten zu verwenden und die Gemeinden rückwirkend im Bevölkerungsdatensatz zu fusionieren. Dies erforderte es im Datensatz die neu geschaffenen Fusionsgemeinden manuell einzutragen. Die Bevölkerungszahlen wurden aus den an der Fusion beteiligten Gemeinden errechnet. </p>
+
+<p>Im Datensatz, wie er beim BFS online bezogen werden kann, ist die Anzahl Einwohner nach Nationalität angegeben. In unserer Datenvisualisierung benötigen wir zusätzlich die Anzahl Einwohner pro Kontinent. Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden diese Daten beim Laden des Datensatzes berechnet. </p>
+
+<p>Dazu wurde ein neues Objekt (world) definiert, in welchem die einzelnen Kontinente als Eigenschaften repräsentiert sind, welche ein Array enthalten mit den dazu gehörenden Nationalitäten.</p>
+
+<pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Albanien", "Andorra", (...)], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
 </code></pre>
 
-<p>Beim Laden des Datensatzes wird über die Eigenschaften des Objekts (world) iteriert und die Bevölkerung wird pro Kategorie zusammengezählt. Die Schweiz..  (könnte man auch weglassen)</p>
+<p>Beim Laden des Datensatzes wird über die Eigenschaften des Objekts (world) iteriert und die Bevölkerung wird pro Kategorie zusammengezählt.</p>
 
 <pre><code> for (var key in world) {
   if (world.hasOwnProperty(key)) {
