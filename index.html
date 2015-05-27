@@ -78,9 +78,31 @@
 <li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/Gemeinden_2010.csv">Gemeinden_2010.csv</a></li>
 </ul>
 
-<p>Im Datensatz, wie er beim BFS online bezogen werden kann, ist die Anzahl Einwohner nach Nationalität angegeben. In unserer Datenvisualisierung benötigen wir zusätzlich die Anzahl Einwohner pro Kontinent. Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden diese Daten beim Laden des Datensatzes berechnet. </p>
+<h2>
+<a id="geodaten" class="anchor" href="#geodaten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geodaten</h2>
 
-<p>Dazu wurde ein neues Objekt (world) definiert, in welchem die einzelnen Kontinente als Eigenschaften repräsentiert sind, welche ein Array enthalten mit den dazu gehörenden Nationalitäten.</p>
+<p>Die benötigten Geodaten konnten unter <a href="https://github.com/interactivethings/swiss-maps">https://github.com/interactivethings/swiss-maps</a> bezogen werden. Die in der Visualisierung verwendeten Geodaten des Kanton Bern können unter folgendem Link im TopoJSON Format heruntergeladen werden. Sie unterstehen der <a href="http://www.toposhop.admin.ch/de/shop/terms/use/finished_products">Lizenz für die kostenlose Geodaten des Bundesamtes für Landestopografie swisstopo</a></p>
+
+<ul>
+<li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/be-municipalities.json">be-municipalities.json</a></li>
+</ul>
+
+<h2>
+<a id="flexibilität" class="anchor" href="#flexibilit%C3%A4t" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flexibilität</h2>
+
+<p>Die Geodaten und die Bevölkerungsdaten wurden so weit wie möglich in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. (welche bereits in beiden Datensätzen enthalten ist) beim Laden der App verbunden. Alle relativen Bevölkerungsanteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass grosse Änderungen am Source Code oder am Datensatz gemacht werden müssen.</p>
+
+<h3>
+<a id="gemeindefusionen" class="anchor" href="#gemeindefusionen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gemeindefusionen</h3>
+
+<p>Weil die Datensätze Bevölkerungsdaten (2010-2013) und Geodaten (2015) zu verschiedenen Zeitpunkten erhoben wurden, stellte sich uns das Problem, dass einige Gemeinden inzwischen fusioniert wurden und damit nicht mehr existierten, bzw. neue Fusionsgemeinden in der Zwischenzeit entstanden sind. Wir entschieden uns dazu, die aktuellen GeoDaten zu verwenden und die Gemeinden rückwirkend im Bevölkerungsdatensatz zu fusionieren. Dies erforderte es im Datensatz die neu geschaffenen Fusionsgemeinden manuell einzutragen. Die Bevölkerungszahlen wurden aus den an der Fusion beteiligten Gemeinden errechnet.</p>
+
+<h3>
+<a id="relative-bevölkerungsanteile" class="anchor" href="#relative-bev%C3%B6lkerungsanteile" aria-hidden="true"><span class="octicon octicon-link"></span></a>Relative Bevölkerungsanteile</h3>
+
+<p>Im Datensatz, wie er beim BFS online bezogen werden kann, ist die Anzahl Einwohner nach Nationalität angegeben. In unserer Datenvisualisierung benötigen wir zusätzlich die Anzahl Einwohner pro Kontinent. Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden diese Daten beim Laden des Datensatzes on-the-go berechnet. </p>
+
+<p>Dazu wurde ein neues Objekt (world) definiert, in welchem die einzelnen Kontinente als Eigenschaften repräsentiert sind, und  ein Array mit den dazu gehörenden Nationalitäten enthalten.</p>
 
 <pre><code>var world = { Afrika: [ "Äquatorialguinea", "Äthiopien", "Dschibuti", (...) ], Europa: ["Albanien", "Andorra", (...)], Amerika:["Argentinien" , "Bahamas" , "Barbados", (...) ], Asien: ["Afghanistan", "Bahrain", "Bhutan", (...) ], Ozeanien: ["Australien", "Fidschi", "Nauru", (...)], Andere: ["Staatenlos", "Nicht zuteilbar gemäss den aktuellen Grenzen", "Ohne Angabe"]};
 </code></pre>
@@ -100,25 +122,6 @@
   }        
 }
 </code></pre>
-
-<h2>
-<a id="geodaten" class="anchor" href="#geodaten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geodaten</h2>
-
-<p>Die benötigten Geodaten konnten unter <a href="https://github.com/interactivethings/swiss-maps">https://github.com/interactivethings/swiss-maps</a> bezogen werden. Die in der Visualisierung verwendeten Geodaten des Kanton Bern können unter folgendem Link im TopoJSON Format heruntergeladen werden. Sie unterstehen der <a href="http://www.toposhop.admin.ch/de/shop/terms/use/finished_products">Lizenz für die kostenlose Geodaten des Bundesamtes für Landestopografie swisstopo</a></p>
-
-<ul>
-<li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/be-municipalities.json">be-municipalities.json</a></li>
-</ul>
-
-<h2>
-<a id="flexibilität" class="anchor" href="#flexibilit%C3%A4t" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flexibilität</h2>
-
-<p>Die Geodaten und die Bevölkerungsdaten wurden so weit wie möglich in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. (welche bereits in beiden Datensätzen enthalten ist) beim Laden der App verbunden. Alle relativen Bevölkerungsanteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass grosse Änderungen am Source Code oder am Datensatz gemacht werden müssen.</p>
-
-<h3>
-<a id="gemeindefusionen" class="anchor" href="#gemeindefusionen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gemeindefusionen</h3>
-
-<p>Weil die Datensätze Bevölkerungsdaten (2010-2013) und Geodaten (2015) zu verschiedenen Zeitpunkten erhoben wurden, stellte sich uns das Problem, dass einige Gemeinden inzwischen fusioniert wurden und damit nicht mehr existierten, bzw. neue Fusionsgemeinden in der Zwischenzeit entstanden sind. Wir entschieden uns dazu, die aktuellen GeoDaten zu verwenden und die Gemeinden rückwirkend im Bevölkerungsdatensatz zu fusionieren. Dies erforderte es im Datensatz die neu geschaffenen Fusionsgemeinden manuell einzutragen. Die Bevölkerungszahlen wurden aus den an der Fusion beteiligten Gemeinden errechnet.</p>
 
 <h1>
 <a id="quellen" class="anchor" href="#quellen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quellen</h1>
