@@ -4,22 +4,22 @@
 	<head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="stylesheet.css" type="text/css">
-        <title>Ausländische Bevölkerung im Kanton Bern</title> 
+        <title>Ausländische Bevölkerung im Kanton Bern</title>
+        <script src="d3.min.js" charset="utf-8"></script>
+        <script src="topojson.v1.min.js"></script> 
 	</head>
 
 	<body>
 
-        <script src="d3.min.js" charset="utf-8"></script>
-        <script src="topojson.v1.min.js"></script>
         <div id="panel"><select id="year">
             <option value="2013">2013</option>
             <option value="2012">2012</option> 
             <option value="2011">2011</option>
             <option value="2010">2010</option>
         </select>
-            
-        <img id="info" src="info_icon.svg" alt="Info">
-        <!--CC by Waldir--></div>
+        <img id="refresh" class="info" src="refresh_icon.png" alt="Info"> 
+        <img id="info" class="info"src="info_icon.svg" alt="Info">
+       </div>
         
         <div id="legend">
             <h3>Anteil Bürger ausländischer Herkunft an der ständigen Wohnbevölkerung</h3>
@@ -35,9 +35,9 @@
         <div id="overlay" onclick="overlay();">
             <div>
                 <p id="close"><b>close [x]</b></p>
-                <h3>Open Data Visualisierung, Universität Bern FS 2015</h3>
+                <h3>Ausländische BEvölkerung - Open Data Visualisierung, Universität Bern FS 2015</h3>
                 <h5>Beschreibung</h5>
-                <p>Die App stellt den Anteil ausländischer Staatsbürger an der ständigen Wohnbevölkerung auf Ebene der Gemeinden dar. Durch anklicken einer Gemeinde auf der Karte wird in der rechten Spalte die Zusammensetzung der ausländischen Bevölkerung in dieser Gemeinde visualisiert. Durch anklicken eines Kontinents oder einer Nationalität ändert sich die Einfärbung der Karte, welche nun den prozentualen Anteil der ausgewählten Nation oder des ausgewählten Kontinents an der ständigen Wohnbevölkerung darstellt. <a href="http://loluopendata.github.io/Auslaendische-Bevoelkerung-BE/">Dokumentation und Source Code auf github</a>                 </p>
+                <p>Die App stellt den Anteil ausländischer Staatsbürger an der ständigen Wohnbevölkerung dar. Durch anklicken einer Gemeinde auf der Karte wird die Zusammensetzung der ausländischen Bevölkerung dieser Gemeinde visualisiert. Durch anklicken eines Kontinents oder einer Nationalität ändert sich die Einfärbung der Karte, welche nun den prozentualen Anteil der ausgewählten Nation oder des ausgewählten Kontinents an der ständigen Wohnbevölkerung darstellt. <a href="http://loluopendata.github.io/Auslaendische-Bevoelkerung-BE/">Dokumentation und Source Code auf github</a>                 </p>
                 <h5>Design und Umsetzung</h5>
                     <p>Laurent Kaufmann, laurent.kaufmann@students.unibe.ch</p>
                     <p>Lukas Heppler, lukas.heppler@students.unibe.ch</p>
