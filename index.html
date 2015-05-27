@@ -53,8 +53,8 @@
 
 <p>In der oberen linken Ecke kann im Dropdown Menu ein Datensatz ausgewählt werden. Es stehen Daten aus den Jahren 2010-2013 zur Verfügung.</p>
 
-<h2>
-<a id="vorgehen" class="anchor" href="#vorgehen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vorgehen</h2>
+<h1>
+<a id="vorgehen" class="anchor" href="#vorgehen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Vorgehen</h1>
 
 <p>Wie wurde vorgegangen, wo wurde Inspiration geholt? (Quellen &amp; Links etc.)</p>
 
@@ -64,13 +64,36 @@
 <h3>
 <a id="map" class="anchor" href="#map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map</h3>
 
-<p>Woher haben wir die Geodaten (Koi?) Welches Example haben wir für die Map verwendet?</p>
+<p>Basiert auf <a href="http://bl.ocks.org/herrstucki/4327678">http://bl.ocks.org/herrstucki/4327678</a>
+Woher haben wir die Geodaten (Koi?) Welches Example haben wir für die Map verwendet?</p>
 
 <h3>
 <a id="sunburst" class="anchor" href="#sunburst" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sunburst</h3>
 
 <p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>
-Quelle für Sunburst, welche Anpassungen waren notwendig? </p>
+Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können. Jeder Nationalität eine Farbe zuzuweisen hätte die Darstellung zu unübersichtlich gemacht. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches normalerweise ein "nested JSON" File benötigt um die Elemente richtig zu gruppieren:</p>
+
+<p>Nested JSON:</p>
+
+<pre><code>{
+ "name": "parent",
+ "children": [
+  {
+   "name": "children 1",
+   "children": [
+    {
+     "name": "children 2",
+     "children": [
+      {"name": "children 3", "size": 3938},
+      {"name": "children 4", "size": 3812},
+      {"name": "children 5", "size": 743}
+     ]
+    }
+   ]
+  }
+ ]
+}
+</code></pre>
 
 <h3>
 <a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
