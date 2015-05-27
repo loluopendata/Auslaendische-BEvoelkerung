@@ -73,27 +73,24 @@ Woher haben wir die Geodaten (Koi?) Welches Example haben wir für die Map verwe
 <p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>
 Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können. Jeder Nationalität eine Farbe zuzuweisen hätte die Darstellung zu unübersichtlich gemacht. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches normalerweise ein "nested JSON" File benötigt um die Elemente richtig zu gruppieren:</p>
 
-<p>Nested JSON:</p>
+<p>Beispiel Nested JSON:</p>
 
 <pre><code>{
- "name": "parent",
+ "name": "root",
  "children": [
   {
-   "name": "children 1",
-   "children": [
-    {
-     "name": "children 2",
+     "name": "Europa",
      "children": [
-      {"name": "children 3", "size": 3938},
-      {"name": "children 4", "size": 3812},
-      {"name": "children 5", "size": 743}
+      {"name": "Albanien", "size": 1234},
+      {"name": "Andorra", "size": 5678},
+      {"name": "Belgien", "size": 9123}
      ]
     }
-   ]
-  }
  ]
 }
 </code></pre>
+
+<p>Da wir den Datensatz nicht verändern wollten, wird das Nested JSON on-the-go aus den CSV Daten erzeugt.</p>
 
 <h3>
 <a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
