@@ -69,8 +69,8 @@ $ git checkout gh-pages
 <p>Wird im Sunburst eine Nationalität oder ein Kontinent angeklickt bewirkt dies, dass diese(r) als neuer Filter gesetzt wird:</p>
 
 <ul>
-<li>Im Sunburst wird auf die Stufe des angeklickten Kontinents oder der angeklickten Nationalität hineingezommt</li>
-<li>Die Karte wird neu eingefärbt und zeigt neu den Anteil des gewählten Filters (Kontinent/Nationalität) an der Gesamtbevölkerung.</li>
+<li><p>Im Sunburst wird auf die Stufe des angeklickten Kontinents oder der angeklickten Nationalität hineingezommt</p></li>
+<li><p>Die Karte wird neu eingefärbt und zeigt neu den Anteil des gewählten Filters (Kontinent/Nationalität) an der Gesamtbevölkerung.</p></li>
 </ul>
 
 <p><img src="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/gh-pages/images/visualisation_2.png" alt="Visualisierung_D3js"></p>
@@ -138,20 +138,6 @@ Quelle für Sunburst, welche Anpassungen waren notwendig? </p>
 <li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/Gemeinden_2010.csv">Gemeinden_2010.csv</a></li>
 </ul>
 
-<h2>
-<a id="geodaten" class="anchor" href="#geodaten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geodaten</h2>
-
-<p>Die verwendeten Geodaten des Kantons Bern können unter folgendem Link im TopoJSON Format heruntergeladen werden:</p>
-
-<ul>
-<li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/be-municipalities.json">be-municipalities.json</a></li>
-</ul>
-
-<h3>
-<a id="gemeindefusionen" class="anchor" href="#gemeindefusionen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gemeindefusionen</h3>
-
-<p>Weil die Datensätze Bevölkerungsdaten (2010-2013) und Geodaten (2015) zu verschiedenen Zeitpunkten erhoben wurden, stellte sich uns das Problem, dass einige Gemeinden inzwischen fusioniert wurden und damit nicht mehr existierten, bzw. neue Fusionsgemeinden in der Zwischenzeit entstanden sind. Wir entschieden uns dazu, die aktuellen GeoDaten zu verwenden und die Gemeinden rückwirkend im Bevölkerungsdatensatz zu fusionieren. Dies erforderte es im Datensatz die neu geschaffenen Fusionsgemeinden manuell einzutragen. Die Bevölkerungszahlen wurden aus den an der Fusion beteiligten Gemeinden errechnet. </p>
-
 <p>Im Datensatz, wie er beim BFS online bezogen werden kann, ist die Anzahl Einwohner nach Nationalität angegeben. In unserer Datenvisualisierung benötigen wir zusätzlich die Anzahl Einwohner pro Kontinent. Damit die Datenvisualisierung auch mit neuen Datensätzen funktioniert, ohne dass diese geändert werden müssen, werden diese Daten beim Laden des Datensatzes berechnet. </p>
 
 <p>Dazu wurde ein neues Objekt (world) definiert, in welchem die einzelnen Kontinente als Eigenschaften repräsentiert sind, welche ein Array enthalten mit den dazu gehörenden Nationalitäten.</p>
@@ -174,6 +160,20 @@ Quelle für Sunburst, welche Anpassungen waren notwendig? </p>
   }        
 }
 </code></pre>
+
+<h2>
+<a id="geodaten" class="anchor" href="#geodaten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Geodaten</h2>
+
+<p>Die verwendeten Geodaten des Kantons Bern können unter folgendem Link im TopoJSON Format heruntergeladen werden:</p>
+
+<ul>
+<li><a href="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/master/be-municipalities.json">be-municipalities.json</a></li>
+</ul>
+
+<h3>
+<a id="gemeindefusionen" class="anchor" href="#gemeindefusionen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gemeindefusionen</h3>
+
+<p>Weil die Datensätze Bevölkerungsdaten (2010-2013) und Geodaten (2015) zu verschiedenen Zeitpunkten erhoben wurden, stellte sich uns das Problem, dass einige Gemeinden inzwischen fusioniert wurden und damit nicht mehr existierten, bzw. neue Fusionsgemeinden in der Zwischenzeit entstanden sind. Wir entschieden uns dazu, die aktuellen GeoDaten zu verwenden und die Gemeinden rückwirkend im Bevölkerungsdatensatz zu fusionieren. Dies erforderte es im Datensatz die neu geschaffenen Fusionsgemeinden manuell einzutragen. Die Bevölkerungszahlen wurden aus den an der Fusion beteiligten Gemeinden errechnet. </p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/loluopendata/Auslaendische-Bevoelkerung-BE">Auslaendische-bevoelkerung-be</a> is maintained by <a href="https://github.com/loluopendata">loluopendata</a>.</span>
