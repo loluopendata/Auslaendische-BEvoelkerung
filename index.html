@@ -12,7 +12,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Ausländische BEvölkerung</h1>
-      <h2 class="project-tagline">Darstellung der ausländischen Bevölkerung im Kanton Bern</h2>
+      <h2 class="project-tagline">Darstellung der ausländischen Wohnbevölkerung im Kanton Bern</h2>
       <a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung" class="btn">View on GitHub</a>
       <a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung/tarball/master" class="btn">Download .tar.gz</a>
@@ -22,7 +22,7 @@
       <h1>
 <a id="bedienungsanleitung" class="anchor" href="#bedienungsanleitung" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bedienungsanleitung</h1>
 
-<p>Die Datenvisualisierung besteht aus 2 miteinander verknüpften Elementen, auf der linken Seite wird standardmässig auf einer <strong>Karte</strong> aller Gemeinden des Kanton Berns die Anzahl ausländischer Staatsbürger im Verhältnis zur Gesamtbevölkerung dargestellt (Ausländeranteil in %). Auf der rechten Seite werden in einem <strong>Sunburst</strong> (eine Art Piechart) standardmässig die relativen Anteile der verschiedenen Nationalitäten an der gesamten ausländischen Bevölkerung des Kantons Bern dargestellt.</p>
+<p>Die Datenvisualisierung besteht aus zwei miteinander verknüpften Elementen, auf der linken Seite wird standardmässig auf einer <strong>Karte</strong> aller Gemeinden des Kanton Berns die Anzahl ausländischer Staatsbürger im Verhältnis zur Gesamtbevölkerung dargestellt (Ausländeranteil in %). Auf der rechten Seite werden in einem <strong>Sunburst</strong> (eine Art Piechart) standardmässig die relativen Anteile der verschiedenen Nationalitäten an der gesamten ausländischen Bevölkerung des Kantons Bern dargestellt.</p>
 
 <p><img src="https://raw.githubusercontent.com/loluopendata/Auslaendische-Bevoelkerung-BE/gh-pages/images/visualisation_1.png" alt="Visualisierung_D3js"></p>
 
@@ -69,16 +69,15 @@
 <h3>
 <a id="map" class="anchor" href="#map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map</h3>
 
-<p>Basiert auf <a href="http://bl.ocks.org/herrstucki/4327678">http://bl.ocks.org/herrstucki/4327678</a>
-Woher haben wir die Geodaten (Koi?) Welches Example haben wir für die Map verwendet?</p>
+<p>Basiert auf <a href="http://bl.ocks.org/herrstucki/4327678">http://bl.ocks.org/herrstucki/4327678</a> und <a href="http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html">http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html</a></p>
 
 <h3>
 <a id="sunburst" class="anchor" href="#sunburst" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sunburst</h3>
 
 <p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>
-Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können. Jeder Nationalität eine Farbe zuzuweisen hätte die Darstellung zu unübersichtlich gemacht. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches normalerweise ein "nested JSON" File benötigt um die Elemente richtig zu gruppieren:</p>
+Jeder Nationalität eine Farbe in einem Piechart zuzuweisen hätte die Darstellung zu unübersichtlich gemacht. Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können und dies farblich zu unterstreichen. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches ein "nested JSON" File benötigt um die Elemente richtig zu gruppieren:</p>
 
-<p>Beispiel Nested JSON:</p>
+<p>Aufbau Nested JSON:</p>
 
 <pre><code>{
  "name": "root",
@@ -95,34 +94,36 @@ Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschi
 }
 </code></pre>
 
-<p>Da wir den Datensatz nicht verändern wollten, wird das Nested JSON on-the-go aus den CSV Daten erzeugt.</p>
+<p>Da wir den Datensatz nicht verändern wollten, wird das Nested JSON on-the-go durch die Funktion prepareJSON aus den CSV Daten erzeugt:</p>
+
+<pre><code>function prepareJSON(e){
+    var newData = [];
+    for (var key in world) {
+
+        if (world.hasOwnProperty(key)) {
+            var tmpObject = {name: key, children:[]};
+            for(var i=0;i&lt;world[key].length;i++){
+                var x =  e[world[key][i]];
+                if(x&gt;0){
+                    tmpObject.children.push({name: world[key][i], size: x});
+                }
+
+            }
+
+            newData.push(tmpObject);
+        } 
+
+    }
+    return {name: "root", children: newData};
+}
+</code></pre>
 
 <h3>
 <a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
 
 <p>Baisert auf <a href="http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/">http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/</a></p>
 
-<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Als Eingabewert in die Funktion drawLegend dient die Skala (scale) für welche die Input domain jeweils dem aktuellen maximum im Datensatz angepasst wird. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, dass ein Filter gesetzt wurde.</p>
-
-<pre><code>function drawLegend(scale){
-    d3.select('#legend').selectAll('ul').remove();
-    var legend = d3.select('#legend')
-    .append('ul')
-    .attr('class', 'list-inline');
-
-    var keys = legend.selectAll('li.key')
-    .data(scale.range());
-
-    keys.enter().append('li')
-    .attr('class', 'key')
-    .style('border-top-color', String)
-    .text(function(d) {
-        var r = scale.invertExtent(d);
-        return Math.round(r[0]*1000)/10+'%';
-    });
-
-}
-</code></pre>
+<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Die Input Domain der Skala  wird jeweils dem aktuellen maximum im Datensatz angepasst. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, welcher Filter gesetzt wurde.</p>
 
 <h1>
 <a id="daten" class="anchor" href="#daten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Daten</h1>
@@ -179,7 +180,7 @@ Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschi
 <h1>
 <a id="flexibilität" class="anchor" href="#flexibilit%C3%A4t" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flexibilität</h1>
 
-<p>Die Geodaten und die Bevölkerungsdaten wurden weitestgehend in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. beim Laden der App verbunden. Alle relativen Anteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass Änderungen am Source Code oder am Datensatz gemacht werden müssen.  </p>
+<p>Die Geodaten und die Bevölkerungsdaten wurden so weit wie möglich in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. (welche bereits in beiden Datensätzen enthalten ist) beim Laden der App verbunden. Alle relativen Bevölkerungsanteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass grosse Änderungen am Source Code oder am Datensatz gemacht werden müssen.  </p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung">Ausländische BEvölkerung</a> is maintained by <a href="https://github.com/loluopendata">loluopendata</a>.</span>
