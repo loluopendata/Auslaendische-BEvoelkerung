@@ -64,68 +64,6 @@
 <p>Wie wurde vorgegangen, wo wurde Inspiration geholt? (Quellen &amp; Links etc.)</p>
 
 <h1>
-<a id="quellen" class="anchor" href="#quellen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quellen</h1>
-
-<h3>
-<a id="map" class="anchor" href="#map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map</h3>
-
-<p>Basiert auf <a href="http://bl.ocks.org/herrstucki/4327678">http://bl.ocks.org/herrstucki/4327678</a> und <a href="http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html">http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html</a></p>
-
-<h3>
-<a id="sunburst" class="anchor" href="#sunburst" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sunburst</h3>
-
-<p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>
-Jeder Nationalität eine Farbe in einem Piechart zuzuweisen hätte die Darstellung zu unübersichtlich gemacht. Die hierarchische Visualisierung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können und dies farblich zu unterstreichen. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches ein "nested JSON" File benötigt um die Elemente richtig zu gruppieren:</p>
-
-<p>Aufbau Nested JSON:</p>
-
-<pre><code>{
- "name": "root",
- "children": [
-  {
-     "name": "Europa",
-     "children": [
-      {"name": "Albanien", "size": 1234},
-      {"name": "Andorra", "size": 5678},
-      {"name": "Belgien", "size": 9123}
-     ]
-    }
- ]
-}
-</code></pre>
-
-<p>Da wir den Datensatz nicht verändern wollten, wird das Nested JSON on-the-go durch die Funktion prepareJSON aus den CSV Daten erzeugt:</p>
-
-<pre><code>function prepareJSON(e){
-    var newData = [];
-    for (var key in world) {
-
-        if (world.hasOwnProperty(key)) {
-            var tmpObject = {name: key, children:[]};
-            for(var i=0;i&lt;world[key].length;i++){
-                var x =  e[world[key][i]];
-                if(x&gt;0){
-                    tmpObject.children.push({name: world[key][i], size: x});
-                }
-
-            }
-
-            newData.push(tmpObject);
-        } 
-
-    }
-    return {name: "root", children: newData};
-}
-</code></pre>
-
-<h3>
-<a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
-
-<p>Baisert auf <a href="http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/">http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/</a></p>
-
-<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Die Input Domain der Skala  wird jeweils dem aktuellen maximum im Datensatz angepasst. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, welcher Filter gesetzt wurde.</p>
-
-<h1>
 <a id="daten" class="anchor" href="#daten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Daten</h1>
 
 <h2>
@@ -180,7 +118,69 @@ Jeder Nationalität eine Farbe in einem Piechart zuzuweisen hätte die Darstellu
 <h1>
 <a id="flexibilität" class="anchor" href="#flexibilit%C3%A4t" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flexibilität</h1>
 
-<p>Die Geodaten und die Bevölkerungsdaten wurden so weit wie möglich in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. (welche bereits in beiden Datensätzen enthalten ist) beim Laden der App verbunden. Alle relativen Bevölkerungsanteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass grosse Änderungen am Source Code oder am Datensatz gemacht werden müssen.  </p>
+<p>Die Geodaten und die Bevölkerungsdaten wurden so weit wie möglich in ihrer ursprünglichen Gliederung belassen und werden anhand der BFS-Nr. (welche bereits in beiden Datensätzen enthalten ist) beim Laden der App verbunden. Alle relativen Bevölkerungsanteile werden direkt on-the-go berechnet. Dies bringt die nötige Flexbilität, dass die App auch mit den Geo- und Bevölkerungsdaten von anderen Kantonen oder der ganzen Schweiz betrieben werden kann, ohne dass grosse Änderungen am Source Code oder am Datensatz gemacht werden müssen.</p>
+
+<h1>
+<a id="quellen" class="anchor" href="#quellen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quellen</h1>
+
+<h3>
+<a id="map" class="anchor" href="#map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Map</h3>
+
+<p>Basiert auf <a href="http://bl.ocks.org/herrstucki/4327678">http://bl.ocks.org/herrstucki/4327678</a> und <a href="http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html">http://lvonlanthen.sandbox.iwi.unibe.ch/be/index.html</a></p>
+
+<h3>
+<a id="sunburst" class="anchor" href="#sunburst" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sunburst</h3>
+
+<p>Basiert auf <a href="http://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad">Zoomable sunburst with updating data</a>.
+Jeder Nationalität einzeln in einem Piechart aufzuführen hätte die Darstellung zu unübersichtlich gemacht. Die hierarchische Gliederung des Sunburst schien uns passend, um die verschiedenen Nationalitäten nach Kontinent gruppieren zu können und dies farblich zu unterstreichen. Die Visualisierung nutzt das <a href="https://github.com/mbostock/d3/wiki/Partition-Layout">Partition Layout</a> von D3.js, welches ein <strong><em>nested JSON</em></strong> File benötigt um die Elemente richtig gruppieren zu können:</p>
+
+<p>Aufbau Nested JSON:</p>
+
+<pre><code>{
+ "name": "root",
+ "children": [
+  {
+     "name": "Europa",
+     "children": [
+      {"name": "Albanien", "size": 1234},
+      {"name": "Andorra", "size": 5678},
+      {"name": "Belgien", "size": 9123}
+     ]
+    }
+ ]
+}
+</code></pre>
+
+<p>Da wir den Datensatz nicht verändern wollten, wird das Nested JSON on-the-go durch die Funktion prepareJSON aus den CSV Daten erzeugt:</p>
+
+<pre><code>function prepareJSON(e){
+    var newData = [];
+    for (var key in world) {
+
+        if (world.hasOwnProperty(key)) {
+            var tmpObject = {name: key, children:[]};
+            for(var i=0;i&lt;world[key].length;i++){
+                var x =  e[world[key][i]];
+                if(x&gt;0){
+                    tmpObject.children.push({name: world[key][i], size: x});
+                }
+
+            }
+
+            newData.push(tmpObject);
+        } 
+
+    }
+    return {name: "root", children: newData};
+}
+</code></pre>
+
+<h3>
+<a id="legende" class="anchor" href="#legende" aria-hidden="true"><span class="octicon octicon-link"></span></a>Legende</h3>
+
+<p>Baisert auf <a href="http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/">http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/</a></p>
+
+<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Die Input Domain der Skala  wird jeweils dem aktuellen maximum im Datensatz angepasst. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, welcher Filter gesetzt wurde.  </p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung">Ausländische BEvölkerung</a> is maintained by <a href="https://github.com/loluopendata">loluopendata</a>.</span>
