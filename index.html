@@ -161,8 +161,8 @@ Gründe hinaus</a></p>
 
 <p>Klickt man im Sunburst auf einzelne Nationen, werden deren relativen Anteile im Vergleich zur Gesamtbevölkerung  auf der Karte dargestellt. Jede einzelne Nation zu analysieren würde den Rahmen sprengen. Interessant ist jedoch die Tatsache, dass gewisse Nationen in Gemeinden einen relevanten Anteil der totalen Bevölkerung darstellt. So sind zum Beispiel in der Gemeinde Beatenberg ca. 10% der Bevölkerung deutsche Staatsbürger. Auch in Ostermundigen machen Italiener/-innen ca 5% der Wohnbevölkerung aus. Dies zeigt, dass in gewissen Gemeinden durchaus eine Ballung von einzelnen Nationalitäten besteht. Hierdurch kann die Wichtigkeit von gewissen Nationalitäten und somit auch deren Kultur für einzelne Gemeinden gezeigt werden.</p>
 
-<h2>
-<a id="einschränkungen" class="anchor" href="#einschr%C3%A4nkungen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Einschränkungen</h2>
+<h1>
+<a id="einschränkungen" class="anchor" href="#einschr%C3%A4nkungen" aria-hidden="true"><span class="octicon octicon-link"></span></a>Einschränkungen</h1>
 
 <p>Alle verwendeten Daten beziehen sich ausschliesslich auf die ständige Wohnbevölkerung nach <em><strong>Verordnung  431.112.1 über die eidgenössische Volkszählung, Abschnitt 1, Artikel 2 d:</strong></em></p>
 
@@ -171,10 +171,7 @@ Gründe hinaus</a></p>
 2. ausländischen Staatsangehörigen ausserhalb des Asylprozesses mit einer Aufenthalts- oder Niederlassungsbewilligung für mindestens zwölf Monate oder Kurzaufenthaltsbewilligungen für eine kumulierte Aufenthaltsdauer von mindestens zwölf Monaten,
 3. Personen im Asylprozess mit einer Gesamtaufenthaltsdauer von mindestens zwölf Monaten;</p>
 
-<p>Desweitern wird hier nochmals darauf hingewiesen, dass die Karte des Kantons Berns immer die <strong>relativen Anteile</strong> der ausländischen Wohnbevölkerung gegenüber der Gesamtbevölkerung darstellt. Der Sunburst zeigt jedoch den Anteil der einzelnen Untergruppen an der Obergruppe. Also den Anteil der Kontinente/Länder an der gesamten <strong>ausländischen Wohnbevölkerung</strong>. </p>
-
-<h2>
-<a id="erweiterungsmöglichkeiten" class="anchor" href="#erweiterungsm%C3%B6glichkeiten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Erweiterungsmöglichkeiten</h2>
+<p>Des weiteren wird hier nochmals darauf hingewiesen, dass die Karte des Kantons Berns immer die <strong>relativen Anteile</strong> der ausländischen Wohnbevölkerung gegenüber der Gesamtbevölkerung darstellt. Der Sunburst zeigt jedoch den Anteil der einzelnen Untergruppen an der gesamten ausländischen Wohnbevölkerung. Also den Anteil der Kontinente/Länder an der gesamten <strong>ausländischen Wohnbevölkerung</strong>. </p>
 
 <h1>
 <a id="daten" class="anchor" href="#daten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Daten</h1>
@@ -296,7 +293,17 @@ Jeder Nationalität einzeln in einem Piechart aufzuführen hätte die Darstellun
 
 <p>Baisert auf <a href="http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/">http://eyeseast.github.io/visible-data/2013/08/27/responsive-legends-with-d3/</a></p>
 
-<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Die Input Domain der Skala  wird jeweils dem aktuellen maximum im Datensatz angepasst. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, welcher Filter gesetzt wurde.  </p>
+<p>Die Legende wird beim Ändern des Filters und bei der Auswahl eines neuen Datensatzes neu generiert. Die Input Domain der Skala  wird jeweils dem aktuellen maximum im Datensatz angepasst. Die Farben der Output range orientieren sich an den Farben der jeweiligen Kontinente, so dass auf der Karte jeweils leicht zu erkennen ist, welcher Filter gesetzt wurde.</p>
+
+<h1>
+<a id="erweiterungsmöglichkeiten" class="anchor" href="#erweiterungsm%C3%B6glichkeiten" aria-hidden="true"><span class="octicon octicon-link"></span></a>Erweiterungsmöglichkeiten</h1>
+
+<p>Wir sehen zwei Möglichkeiten, wie die Visualisierung weiterverwendet und erweitert werden kann. 
+1. Eine sinnvolle Erweiterung sehen wir durch das Hinzufügen einer weiteren Darstellungsform. Diese sollte die Veränderung des relativen Ausländeranteils an der ständigen Wohnbevölkerung darstellen. Dazu wäre ein simpler Graph mit der Zeit auf der x-Achse und den relativen Anteilen auf der Y-Achse denkbar. Aktualisiert wird dieser ebenfalls beim Klick auf die Gemeinden oder die einzelnen Kontinente/ Regionen. Durch diese Visualisierung könnten Veränderungen und Trends in den einzelnen Gemeinden erkannt werden.</p>
+
+<ol>
+<li>Diese Visualisierung könnte auf andere Kantone oder sogar auf die ganze Schweiz übertragen werden. Dank der Live-Berechnung der relativen Anteile und der Programmierstruktur, ist durch wenige Schritte eine Ausdehnung auf andere Kantone oder die ganze Schweiz möglich. </li>
+</ol>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/loluopendata/Auslaendische-BEvoelkerung">Ausländische BEvölkerung</a> is maintained by <a href="https://github.com/loluopendata">loluopendata</a>.</span>
