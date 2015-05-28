@@ -1,3 +1,9 @@
+body {
+	height: 615px;
+	width:1260px;
+	
+}
+
 #legend {
     width: 800px;
     float:left;
